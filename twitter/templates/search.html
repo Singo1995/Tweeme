@@ -1,0 +1,39 @@
+{% extends "base.html" %}
+{% block title %} List View {% endblock title%}
+{% block script %}
+<script>
+    $(document).ready(function () {
+        loadTweetContainer('tweet-container')
+    });
+</script>
+{% endblock script %}
+{% block content %}
+<br />
+<div class='row'>
+    <div class='col-sm-12'>
+        {% if request.GET.q %}
+        <p class='lead'>Results for {{ request.GET.q }}</p>
+        <hr />
+        {% endif %}
+    </div>
+    <div class='col-sm-9'>
+        <h6>Tweets</h6>
+        <!-- {% if not request.GET.q %}
+        <div class="media-body text-left">
+            {% include "tweets/form.html" with form=create_form action_url=create_url btn_title='Tweet' form_class='tweet-form' %}
+        </div>
+        {% endif %} -->
+        <div id='tweet-container' data-url="/api/search/">
+        </div>
+        <a href='#' id=loadmore>Load More Tweets</a>
+    </div>
+    <div class='col-sm-3'>
+        <h6>Users</h6>
+        {% for user in users %}
+        <a href='{{ user.username }}/'>{{ user.username }}</a><br />
+        {% empty %}
+        <p>No users found</p>
+        {% endfor %}
+    </div>
+</div>
+{% endblock content %}

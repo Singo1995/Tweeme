@@ -1,0 +1,6 @@
+{% for profile in recommended %}
+<!-- <h6>{{ profile.user.username }}</h6> -->
+<a href="/profiles/{{ profile.user.username }}">{{ profile.user.username }}</a><br />
+{% empty %}
+<h6>No Recommendations</h6>
+{% endfor %}
